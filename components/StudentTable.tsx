@@ -23,8 +23,8 @@ const thStyle = css`
   position: sticky;
   top: 0;
   z-index: 3; /* Ensure the header is above other content */
-  font-size: 7px; /* 헤더 폰트 사이즈를 줄임 */
-  min-width: 40px;
+  font-size: 10px; /* 헤더 폰트 사이즈를 줄임 */
+  min-width: 50px;
   max-width: 200px; /* 최대 너비를 200px로 설정 */
 `;
 
@@ -35,8 +35,8 @@ const tdStyle = css`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 9px; /* 셀 폰트 사이즈를 줄임 */
-  min-width: 40px;
+  font-size: 11px; /* 셀 폰트 사이즈를 줄임 */
+  min-width: 50px;
   max-width: 200px; /* 최대 너비를 200px로 설정 */
   cursor: pointer;
   position: relative;
@@ -51,7 +51,7 @@ const stickyColStyle = css`
 
 const stickySecondColStyle = css`
   position: sticky;
-  left: 40px; /* Adjust this value based on the width of the first sticky column */
+  left: 50px; /* Adjust this value based on the width of the first sticky column */
   background-color: #f2f2f2;
   z-index: 2; /* Ensure the second column is above other content */
 `;
