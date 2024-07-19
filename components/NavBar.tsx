@@ -86,6 +86,11 @@ const NavBar = () => {
             <NavLink>Home</NavLink>
           </Link>
         </NavItem>
+        <NavItem>
+          <Link href="/all" passHref>
+            <NavLink>All</NavLink>
+          </Link>
+        </NavItem>
         {links.map(({ cardinal, prefixes }) => (
           <NavItem key={cardinal}>
             <NavLink onClick={() => toggleDropdown(`${cardinal}`)}>
