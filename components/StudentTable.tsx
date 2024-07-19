@@ -1,7 +1,8 @@
-// components/StudentTable.tsx
 /** @jsxImportSource @emotion/react */
 import { useState, useRef, useEffect } from "react";
 import { css } from "@emotion/react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const containerStyle = css`
   width: 100%;
@@ -56,6 +57,22 @@ const stickySecondColStyle = css`
   z-index: 2; /* Ensure the second column is above other content */
 `;
 
+const toastContainerStyle = css`
+  .Toastify__toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999; /* Ensure the toast is above other content */
+    width: 100%;
+    max-width: 500px;
+    @media (max-width: 768px) {
+      max-width: 90%;
+      bottom: 20px;
+    }
+  }
+`;
+
 type Props = {
   students: any[];
 };
@@ -72,8 +89,13 @@ export const StudentTable: React.FC<Props> = ({ students }) => {
     }
   }, [students]);
 
+  const handleDoubleClick = (data: string) => {
+    toast(data, { autoClose: 3000, position: "bottom-center" }); // 3초 동안 표시
+  };
+
   return (
     <div css={containerStyle} ref={containerRef}>
+      <ToastContainer css={toastContainerStyle} />
       <table css={tableStyle}>
         <thead>
           <tr>
@@ -108,6 +130,7 @@ export const StudentTable: React.FC<Props> = ({ students }) => {
                         ? stickySecondColStyle
                         : null,
                   ]}
+                  onDoubleClick={() => handleDoubleClick(data)}
                 >
                   {data}
                 </td>
