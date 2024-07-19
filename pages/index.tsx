@@ -45,6 +45,12 @@ const SectionContent = styled.p`
   font-size: 14px;
   line-height: 1.6;
   color: #333;
+
+  br {
+    content: "";
+    display: block;
+    margin: 5px 0;
+  }
 `;
 
 const LogoutButton = styled.button`
@@ -103,7 +109,7 @@ const Home = () => {
           3. 구글 스프레드시트 관리시트 원본을 수정하면 현재 사이트와 자동으로
           동기화가 됩니다.
           <br />
-          4. 가려진 정보들은 더블클릭하면 아래에 표시됩니다.
+          4. 셀을 더블클릭시 아래에도 표시됩니다.
         </SectionContent>
       </Section>
 
