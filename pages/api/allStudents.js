@@ -1,0 +1,83 @@
+// pages/api/allStudents.js
+import { google } from "googleapis";
+import NodeCache from "node-cache";
+
+const cache = new NodeCache({ stdTTL: 300 }); // 5분 TTL
+
+const sheets = google.sheets("v4");
+
+async function getAuthClient() {
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      type: process.env.GOOGLE_TYPE,
+      project_id: process.env.GOOGLE_PROJECT_ID,
+      private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
+      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"), // 줄바꿈 문자 처리
+      client_email: process.env.GOOGLE_CLIENT_EMAIL,
+      client_id: process.env.GOOGLE_CLIENT_ID,
+      auth_uri: process.env.GOOGLE_AUTH_URI,
+      token_uri: process.env.GOOGLE_TOKEN_URI,
+      auth_provider_x509_cert_url:
+        process.env.GOOGLE_AUTH_PROVIDER_X509_CERT_URL,
+      client_x509_cert_url: process.env.GOOGLE_CLIENT_X509_CERT_URL,
+      universe_domain: process.env.GOOGLE_UNIVERSE_DOMAIN,
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
+  });
+
+  const authClient = await auth.getClient();
+  return authClient;
+}
+
+async function fetchSheetData(spreadsheetId, range) {
+  try {
+    const authClient = await getAuthClient();
+
+    const response = await sheets.spreadsheets.values.get({
+      auth: authClient,
+      spreadsheetId,
+      range,
+    });
+    return response.data.values;
+  } catch (error) {
+    console.error("Error fetching sheet data:", error);
+    throw error;
+  }
+}
+
+export default async function handler(req, res) {
+  const cacheKey = `allSheetData`;
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    return res.status(200).json(cachedData);
+  }
+
+  const SHEET_IDS = [
+    process.env.SHEET_ID_J24,
+    process.env.SHEET_ID_S24,
+    process.env.SHEET_ID_F24,
+    process.env.SHEET_ID_J23,
+    process.env.SHEET_ID_S23,
+    process.env.SHEET_ID_F23_1,
+    process.env.SHEET_ID_F23_2,
+    process.env.SHEET_ID_J22,
+    process.env.SHEET_ID_S22,
+    process.env.SHEET_ID_F22,
+    process.env.SHEET_ID_J21,
+    process.env.SHEET_ID_F21,
+    process.env.SHEET_ID_J20,
+  ];
+
+  try {
+    const allDataPromises = SHEET_IDS.map((sheetId) =>
+      fetchSheetData(sheetId, "ST!A2:AQ"),
+    );
+    const allData = (await Promise.all(allDataPromises)).flat();
+    cache.set(cacheKey, allData); // 데이터 캐싱
+    res.status(200).json(allData);
+  } catch (error) {
+    console.error("Error in API handler:", error);
+    res.status(500).json({ error: "Failed to fetch data" });
+  }
+}
