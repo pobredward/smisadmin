@@ -1,0 +1,36 @@
+// next.config.js
+module.exports = {
+  env: {
+    // GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+
+    SHEET_ID_J24: process.env.SHEET_ID_J24,
+    SHEET_ID_S24: process.env.SHEET_ID_S24,
+    SHEET_ID_F24: process.env.SHEET_ID_F24,
+
+    SHEET_ID_J23: process.env.SHEET_ID_J23,
+    SHEET_ID_S23: process.env.SHEET_ID_S23,
+    SHEET_ID_F23_1: process.env.SHEET_ID_F23_1,
+    SHEET_ID_F23_2: process.env.SHEET_ID_F23_2,
+
+    SHEET_ID_J22: process.env.SHEET_ID_J22,
+    SHEET_ID_S22: process.env.SHEET_ID_S22,
+    SHEET_ID_F22: process.env.SHEET_ID_F22,
+
+    SHEET_ID_J21: process.env.SHEET_ID_J21,
+    SHEET_ID_F21: process.env.SHEET_ID_F21,
+
+    SHEET_ID_J20: process.env.SHEET_ID_J20,
+
+    GOOGLE_TYPE: process.env.GOOGLE_TYPE,
+    GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
+    GOOGLE_PRIVATE_KEY_ID: process.env.GOOGLE_PRIVATE_KEY_ID,
+    GOOGLE_PRIVATE_KEY: process.env.GOOGLE_PRIVATE_KEY,
+    GOOGLE_CLIENT_EMAIL: process.env.GOOGLE_CLIENT_EMAIL,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_AUTH_URI: process.env.GOOGLE_AUTH_URI,
+    GOOGLE_TOKEN_URI: process.env.GOOGLE_TOKEN_URI,
+    GOOGLE_AUTH_PROVIDER_X509_CERT_URL: process.env.GOOGLE_AUTH_PROVIDER_X509_CERT_URL,
+    GOOGLE_CLIENT_X509_CERT_URL: process.env.GOOGLE_CLIENT_X509_CERT_URL,
+    GOOGLE_UNIVERSE_DOMAIN: process.env.GOOGLE_UNIVERSE_DOMAIN,
+  },
+};
