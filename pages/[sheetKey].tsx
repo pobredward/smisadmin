@@ -101,22 +101,6 @@ const RowCount = styled.div`
   color: #007bff;
 `;
 
-const LogoutButton = styled.button`
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: #dc3545;
-  color: white;
-  cursor: pointer;
-  display: block;
-  margin: 20px auto;
-
-  &:hover {
-    background-color: #c82333;
-  }
-`;
-
 const SheetPage = () => {
   const router = useRouter();
   const { sheetKey } = router.query;
@@ -211,11 +195,6 @@ const SheetPage = () => {
     await fetchAllStudents();
   };
 
-  const handleLogout = () => {
-    Cookies.remove("authenticated");
-    router.push("/login");
-  };
-
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       searchButtonRef.current?.click();
@@ -256,7 +235,6 @@ const SheetPage = () => {
       <TableContainer>
         <StudentTable students={filteredStudents} />
       </TableContainer>
-      <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
     </Container>
   );
 };
