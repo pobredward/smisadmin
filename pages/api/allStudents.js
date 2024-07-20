@@ -70,10 +70,11 @@ export default async function handler(req, res) {
   ];
 
   try {
-    const allDataPromises = SHEET_IDS.map((sheetId) =>
-      fetchSheetData(sheetId, "ST!A2:AQ"),
-    );
-    const allData = (await Promise.all(allDataPromises)).flat();
+    let allData = [];
+    for (const sheetId of SHEET_IDS) {
+      const data = await fetchSheetData(sheetId, "ST!A2:AQ");
+      allData = allData.concat(data);
+    }
     cache.set(cacheKey, allData); // 데이터 캐싱
     res.status(200).json(allData);
   } catch (error) {
