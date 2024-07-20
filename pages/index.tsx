@@ -122,6 +122,8 @@ const Home = () => {
           <BoldText>셀을 더블클릭</BoldText>
           <br />
           3. All 페이지는 내용이 많아 딜레이가 발생하므로 검색용으로만 사용하기
+          <br />
+          4. 페이지 클릭 시 10분간 캐시를 등록하여 재접속 시 로딩 속도가 빨라짐
         </SectionContent>
       </Section>
 
