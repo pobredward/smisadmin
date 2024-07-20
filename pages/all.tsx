@@ -21,28 +21,37 @@ const Title = styled.h1`
 
 const SearchContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 10px;
 `;
 
+const SearchLeft = styled.div`
+  display: flex;
+`;
+
+const SearchRight = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const SearchInput = styled.input`
-  padding: 10px;
+  padding: 5px 10px;
   font-size: 12px;
-  margin-right: 10px;
+  margin-right: 5px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 200px;
+  border-radius: 3px;
+  width: 100px;
 `;
 
 const SearchButton = styled.button`
-  padding: 3px 12px;
-  font-size: 16px;
+  padding: 5px 10px;
+  font-size: 14px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: #007bff;
   color: white;
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 5px;
 
   &:hover {
     background-color: #0056b3;
@@ -50,16 +59,31 @@ const SearchButton = styled.button`
 `;
 
 const ResetButton = styled.button`
-  padding: 3px 12px;
-  font-size: 16px;
+  padding: 5px 10px;
+  font-size: 14px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: #6c757d;
+  color: white;
+  cursor: pointer;
+  margin-right: 5px;
+
+  &:hover {
+    background-color: #5a6268;
+  }
+`;
+
+const SyncButton = styled.button`
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #28a745;
   color: white;
   cursor: pointer;
 
   &:hover {
-    background-color: #5a6268;
+    background-color: #218838;
   }
 `;
 
@@ -88,19 +112,19 @@ const AllPage = () => {
   const searchTermRef = useRef<HTMLInputElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const fetchAllStudents = async () => {
-      try {
-        const response = await axios.get("/api/allStudents");
-        setStudents(response.data);
-        setFilteredStudents(response.data);
-      } catch (error) {
-        setError("Failed to fetch data");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchAllStudents = async () => {
+    try {
+      const response = await axios.get("/api/allStudents");
+      setStudents(response.data);
+      setFilteredStudents(response.data);
+    } catch (error) {
+      setError("Failed to fetch data");
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchAllStudents();
   }, []);
 
@@ -110,13 +134,11 @@ const AllPage = () => {
       setFilteredStudents(students);
     } else {
       const lowercasedTerm = searchTerm.toLowerCase();
-      const filtered = students.filter(
-        (student, index) =>
-          index === 0 ||
-          student.some(
-            (value: string) =>
-              value && value.toLowerCase().includes(lowercasedTerm),
-          ),
+      const filtered = students.filter((student) =>
+        student.some(
+          (value: string) =>
+            value && value.toLowerCase().includes(lowercasedTerm),
+        ),
       );
       setFilteredStudents(filtered);
     }
@@ -127,6 +149,12 @@ const AllPage = () => {
       searchTermRef.current.value = "";
     }
     setFilteredStudents(students);
+  };
+
+  const handleSync = async () => {
+    setLoading(true);
+    await axios.get("/api/clearCache");
+    await fetchAllStudents();
   };
 
   const handleLogout = () => {
@@ -152,16 +180,21 @@ const AllPage = () => {
     <Container>
       <Title>모든 학생 정보</Title>
       <SearchContainer>
-        <SearchInput
-          type="text"
-          placeholder="검색어를 입력하세요"
-          ref={searchTermRef}
-          onKeyPress={handleKeyPress}
-        />
-        <SearchButton onClick={handleSearch} ref={searchButtonRef}>
-          조회
-        </SearchButton>
-        <ResetButton onClick={handleReset}>전체</ResetButton>
+        <SearchLeft>
+          <SyncButton onClick={handleSync}>동기화</SyncButton>
+        </SearchLeft>
+        <SearchRight>
+          <SearchInput
+            type="text"
+            placeholder="검색어 입력"
+            ref={searchTermRef}
+            onKeyPress={handleKeyPress}
+          />
+          <SearchButton onClick={handleSearch} ref={searchButtonRef}>
+            조회
+          </SearchButton>
+          <ResetButton onClick={handleReset}>전체</ResetButton>
+        </SearchRight>
       </SearchContainer>
       <StudentTableAll students={filteredStudents} />
       <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
