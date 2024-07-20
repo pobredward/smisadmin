@@ -87,6 +87,34 @@ const SyncButton = styled.button`
   }
 `;
 
+const TableContainer = styled.div`
+  overflow: auto;
+  max-height: 80vh;
+`;
+
+const RowCount = styled.div`
+  text-align: left;
+  margin-bottom: 2px;
+  font-size: 12px;
+  color: #007bff;
+`;
+
+const LogoutButton = styled.button`
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+
+  &:hover {
+    background-color: #c82333;
+  }
+`;
+
 const AllPage = () => {
   const router = useRouter();
   const [students, setStudents] = useState<any[]>([]);
@@ -96,19 +124,19 @@ const AllPage = () => {
   const searchTermRef = useRef<HTMLInputElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
 
-  const fetchAllStudents = async () => {
-    try {
-      const response = await axios.get("/api/allStudents");
-      setStudents(response.data);
-      setFilteredStudents(response.data);
-    } catch (error) {
-      setError("Failed to fetch data");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchAllStudents = async () => {
+      try {
+        const response = await axios.get("/api/allStudents");
+        setStudents(response.data);
+        setFilteredStudents(response.data);
+      } catch (error) {
+        setError("Failed to fetch data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchAllStudents();
   }, []);
 
@@ -118,11 +146,13 @@ const AllPage = () => {
       setFilteredStudents(students);
     } else {
       const lowercasedTerm = searchTerm.toLowerCase();
-      const filtered = students.filter((student) =>
-        student.some(
-          (value: string) =>
-            value && value.toLowerCase().includes(lowercasedTerm),
-        ),
+      const filtered = students.filter(
+        (student, index) =>
+          index === 0 ||
+          student.some(
+            (value: string) =>
+              value && value.toLowerCase().includes(lowercasedTerm),
+          ),
       );
       setFilteredStudents(filtered);
     }
@@ -138,7 +168,15 @@ const AllPage = () => {
   const handleSync = async () => {
     setLoading(true);
     await axios.get("/api/clearCache");
-    await fetchAllStudents();
+    const response = await axios.get("/api/allStudents");
+    setStudents(response.data);
+    setFilteredStudents(response.data);
+    setLoading(false);
+  };
+
+  const handleLogout = () => {
+    Cookies.remove("authenticated");
+    router.push("/login");
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -175,7 +213,13 @@ const AllPage = () => {
           <ResetButton onClick={handleReset}>전체</ResetButton>
         </SearchRight>
       </SearchContainer>
-      <StudentTableAll students={filteredStudents} />
+      <RowCount>
+        총 {filteredStudents.length - 1}개의 행이 조회되었습니다.
+      </RowCount>
+      <TableContainer>
+        <StudentTableAll students={filteredStudents} />
+      </TableContainer>
+      <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
     </Container>
   );
 };
