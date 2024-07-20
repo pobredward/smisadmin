@@ -34,101 +34,100 @@ const KoreanTranslation = styled.div`
 
 const motivationalQuotes = [
   {
-    english: "Believe in yourself and all that you are.",
-    korean: "너 자신과 너의 모든 것을 믿으렴.",
+    english: "Let's get started.",
+    korean: "시작해 봅시다.",
   },
   {
-    english: "You are stronger than you think.",
-    korean: "넌 생각보다 강한 사람이야.",
+    english: "Can we go over the agenda?",
+    korean: "의제에 대해 논의할 수 있을까요?",
   },
   {
-    english: "Your potential is endless.",
-    korean: "너는 잠재력이 무한한 사람이야.",
+    english: "Let's table this topic for now.",
+    korean: "이 주제는 일단 보류합시다.",
   },
   {
-    english: "You are capable of amazing things.",
-    korean: "너는 놀라운 일을 해낼 수 있어.",
+    english: "Could you clarify your point?",
+    korean: "당신의 요점을 명확히 해줄 수 있나요?",
   },
   {
-    english: "Stay positive, work hard, make it happen.",
-    korean: "긍정적으로 생각하고 열심히 일하며 해내자.",
+    english: "Let's circle back to that later.",
+    korean: "그것에 대해서는 나중에 다시 이야기합시다.",
   },
   {
-    english: "Don’t stop until you’re proud.",
-    korean: "자랑스러운 사람이 될 때까지 멈추지 마.",
+    english: "We need to stay on track.",
+    korean: "우리는 주제에 집중해야 합니다.",
   },
   {
-    english: "Dream big and dare to fail.",
-    korean: "큰 꿈을 꾸고 실패를 두려워하지 마.",
+    english: "Could you elaborate on that?",
+    korean: "그것에 대해 좀 더 설명해 줄 수 있나요?",
   },
   {
-    english: "You have the power to create change.",
-    korean: "넌 변화를 만들 힘이 있어.",
+    english: "What's the timeline for this project?",
+    korean: "이 프로젝트의 일정은 어떻게 되나요?",
   },
   {
-    english: "Keep pushing forward no matter what.",
-    korean: "어떤 일이 있어도 계속 나아가자!",
+    english: "Let's take a short break.",
+    korean: "잠시 휴식을 취합시다.",
   },
   {
-    english: "Your efforts make a difference.",
-    korean: "네 노력은 변화를 만들 수 았어!",
+    english: "Can we discuss this offline?",
+    korean: "이것에 대해 비공식적으로 논의할 수 있을까요?",
   },
   {
-    english:
-      "Success usually comes to those who are too busy to be looking for it.",
-    korean: "성공은 보통 그것을 찾느라 바쁜 사람들에게 와.",
+    english: "That's a great point.",
+    korean: "좋은 지적입니다.",
   },
   {
-    english: "Your passion is waiting for your courage to catch up.",
-    korean: "너의 열정은 너의 용기를 기다리고 있어.",
+    english: "Let's move on to the next item.",
+    korean: "다음 항목으로 넘어갑시다.",
   },
   {
-    english: "It always seems impossible until it's done.",
-    korean: "이루어질 때까지는 항상 불가능해 보인다.",
+    english: "Can we get an update on that?",
+    korean: "그것에 대한 업데이트를 받을 수 있을까요?",
   },
   {
-    english: "Your hard work will pay off. Keep going!",
-    korean: "너의 노력이 결실을 맺을 거야. 계속 나아가자!",
+    english: "Let's keep this meeting brief.",
+    korean: "이 회의를 간단히 합시다.",
   },
   {
-    english: "Every small step counts towards your big goals.",
-    korean: "작은 발걸음 하나하나가 큰 목표를 향해 나아가고 있어.",
+    english: "Could you summarize that for us?",
+    korean: "그것을 요약해 줄 수 있나요?",
   },
   {
-    english:
-      "The future belongs to those who believe in the beauty of their dreams.",
-    korean: "미래는 꿈의 아름다움을 믿는 사람들의 것이야.",
+    english: "Who will be responsible for this task?",
+    korean: "이 과제는 누가 담당할 것인가요?",
   },
   {
-    english:
-      "Challenges are what make life interesting; overcoming them is what makes life meaningful.",
-    korean: "도전은 삶을 흥미롭게 만들고, 극복하는 것이 삶을 의미 있게 만들어.",
+    english: "Let's review the key points.",
+    korean: "주요 사항을 검토합시다.",
   },
   {
-    english:
-      "Success is the sum of small efforts, repeated day in and day out.",
-    korean: "성공은 매일 반복되는 작은 노력들의 합이야.",
+    english: "Any other questions or comments?",
+    korean: "다른 질문이나 의견이 있나요?",
   },
   {
-    english:
-      "Stay committed to your decisions, but stay flexible in your approach.",
-    korean: "결심에 충실하되 접근 방법은 유연하게 유지하기",
+    english: "Let's set a deadline for this.",
+    korean: "이것의 기한을 정합시다.",
   },
   {
-    english: "Opportunities don't happen. You create them.",
-    korean: "기회는 생기는 것이 아니야. 너가 만드는 거야.",
+    english: "Thank you for your input.",
+    korean: "의견을 주셔서 감사합니다.",
   },
   {
-    english: "Together, we can achieve more.",
-    korean: "함께라면 더 많은 것을 이룰 수 있어.",
+    english: "Can we schedule a follow-up meeting?",
+    korean: "후속 회의를 일정 잡을 수 있을까요?",
   },
   {
-    english: "Innovation distinguishes between a leader and a follower.",
-    korean: "혁신은 리더와 팔로워를 구분 짓는 것이다.",
+    english: "Let's wrap this up.",
+    korean: "이제 마무리합시다.",
   },
   {
-    english: "A positive mindset brings positive things.",
-    korean: "긍정적인 마음가짐을 가져야 긍정적인 결과를 가져온다.",
+    english: "We need to reach a consensus.",
+    korean: "우리는 합의에 도달해야 합니다.",
+  },
+  {
+    english: "That's outside the scope of this meeting.",
+    korean: "그것은 이 회의의 범위를 벗어납니다.",
   },
 ];
 
