@@ -15,10 +15,10 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   color: #007bff;
 `;
 
@@ -26,11 +26,10 @@ const Section = styled.div`
   width: 80%;
   max-width: 600px;
   margin-bottom: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left; /* 왼쪽 정렬 추가 */
+  &:not(:last-of-type) {
+    margin-bottom: 20px; /* 섹션 간 간격을 20px로 설정 */
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -38,19 +37,33 @@ const SectionTitle = styled.h2`
   font-weight: bold;
   margin-bottom: 10px;
   color: #007bff;
-  text-align: center;
+  text-align: left; /* 왼쪽 정렬 추가 */
+`;
+
+const Divider = styled.hr`
+  width: 100%;
+  border: 0;
+  height: 1px;
+  background: #ddd;
+  margin: 10px 0;
 `;
 
 const SectionContent = styled.p`
   font-size: 14px;
   line-height: 1.6;
   color: #333;
+  text-align: left; /* 왼쪽 정렬 추가 */
 
   br {
     content: "";
     display: block;
     margin: 5px 0;
   }
+`;
+
+const BoldText = styled.span`
+  font-weight: bold;
+  font-size: 14px;
 `;
 
 const LogoutButton = styled.button`
@@ -90,6 +103,7 @@ const Home = () => {
 
       <Section>
         <SectionTitle>제작 배경</SectionTitle>
+        <Divider />
         <SectionContent>
           SMIS 캠프별, 기수별 학생 정보를 조회하는 올인원 페이지가 있으면
           어디서든 찾아보기 좋을 것 같아 만들어 보았습니다. 현재는 조회하는
@@ -99,17 +113,15 @@ const Home = () => {
 
       <Section>
         <SectionTitle>사용 가이드</SectionTitle>
+        <Divider />
         <SectionContent>
-          1. 상단의 네비게이션 바를 사용하여 원하는 캠프와 기수의 학생 정보를
-          조회할 수 있습니다.
+          1. 관리시트 수정 후 바로 적용하고 싶을 땐 <BoldText>동기화</BoldText>
+          를 누르기
           <br />
-          2. 검색 창에 키워드를 입력하고 조회 버튼을 클릭하면, 키워드를 포함하는
-          학생 정보들을 모두 검색할 수 있습니다.
+          2. 테이블 너비가 작아 내용이 가린다면{" "}
+          <BoldText>셀을 더블클릭</BoldText>
           <br />
-          3. 구글 스프레드시트 관리시트 원본을 수정하면 현재 사이트와 자동으로
-          동기화가 됩니다.
-          <br />
-          4. 셀을 더블클릭시 아래에도 표시됩니다.
+          3. All 페이지는 내용이 많아 딜레이가 발생하므로 검색용으로만 사용하기
         </SectionContent>
       </Section>
 

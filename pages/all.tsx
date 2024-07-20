@@ -87,22 +87,6 @@ const SyncButton = styled.button`
   }
 `;
 
-const LogoutButton = styled.button`
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: #dc3545;
-  color: white;
-  cursor: pointer;
-  display: block;
-  margin: 20px auto;
-
-  &:hover {
-    background-color: #c82333;
-  }
-`;
-
 const AllPage = () => {
   const router = useRouter();
   const [students, setStudents] = useState<any[]>([]);
@@ -157,11 +141,6 @@ const AllPage = () => {
     await fetchAllStudents();
   };
 
-  const handleLogout = () => {
-    Cookies.remove("authenticated");
-    router.push("/login");
-  };
-
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       searchButtonRef.current?.click();
@@ -197,7 +176,6 @@ const AllPage = () => {
         </SearchRight>
       </SearchContainer>
       <StudentTableAll students={filteredStudents} />
-      <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
     </Container>
   );
 };
