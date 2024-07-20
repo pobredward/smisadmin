@@ -36,11 +36,11 @@ const SearchRight = styled.div`
 
 const SearchInput = styled.input`
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 14px;
   margin-right: 5px;
   border: 1px solid #ddd;
   border-radius: 3px;
-  width: 100px;
+  width: 120px;
 `;
 
 const SearchButton = styled.button`
