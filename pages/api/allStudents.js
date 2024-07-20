@@ -2,7 +2,7 @@
 import { google } from "googleapis";
 import NodeCache from "node-cache";
 
-const cache = new NodeCache({ stdTTL: 300 }); // 5분 TTL
+const cache = new NodeCache({ stdTTL: 3600 }); // 1시간 TTL
 
 const sheets = google.sheets("v4");
 
