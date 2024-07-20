@@ -54,7 +54,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const range = "ST!A1:AQ"; // 필요한 범위 설정
+    const range = "ST!A2:AQ"; // 필요한 범위 설정
     const data = await fetchSheetData(spreadsheetId, range);
     cache.set(cacheKey, data); // 데이터 캐싱
     res.status(200).json(data);

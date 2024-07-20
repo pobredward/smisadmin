@@ -1,6 +1,5 @@
-// components/StudentTableAll.tsx
 /** @jsxImportSource @emotion/react */
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { css } from "@emotion/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,23 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 const containerStyle = css`
   width: 100%;
   height: 80vh; /* 화면 높이를 차지하도록 설정 */
-  overflow: auto;
+  overflow: auto; /* 스크롤을 가능하게 설정 */
 `;
 
 const tableStyle = css`
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  font-size: 12px;
-`;
-
-const thStyle = css`
-  background-color: #f2f2f2;
-  padding: 8px;
-  border: 1px solid #ddd;
-  font-size: 10px;
-  min-width: 50px;
-  max-width: 200px;
+  font-size: 12px; /* 전체 폰트 사이즈를 줄임 */
 `;
 
 const tdStyle = css`
@@ -34,9 +24,9 @@ const tdStyle = css`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 11px;
+  font-size: 11px; /* 셀 폰트 사이즈를 줄임 */
   min-width: 50px;
-  max-width: 200px;
+  max-width: 200px; /* 최대 너비를 200px로 설정 */
   cursor: pointer;
   position: relative;
 `;
@@ -45,14 +35,14 @@ const stickyColStyle = css`
   position: sticky;
   left: 0;
   background-color: #f2f2f2;
-  z-index: 2;
+  z-index: 2; /* Ensure the first column is above other content */
 `;
 
 const stickySecondColStyle = css`
   position: sticky;
-  left: 50px;
+  left: 50px; /* Adjust this value based on the width of the first sticky column */
   background-color: #f2f2f2;
-  z-index: 2;
+  z-index: 2; /* Ensure the second column is above other content */
 `;
 
 const toastContainerStyle = css`
@@ -61,7 +51,7 @@ const toastContainerStyle = css`
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 9999;
+    z-index: 9999; /* Ensure the toast is above other content */
     width: 100%;
     max-width: 500px;
     @media (max-width: 768px) {
@@ -86,7 +76,7 @@ export const StudentTableAll: React.FC<Props> = ({ students }) => {
   }, [students]);
 
   const handleDoubleClick = (data: string) => {
-    toast(data, { autoClose: 3000, position: "bottom-center" });
+    toast(data, { autoClose: 3000, position: "bottom-center" }); // 3초 동안 표시
   };
 
   return (

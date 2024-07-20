@@ -51,11 +51,11 @@ const DropdownMenu = styled.ul<{ visible: boolean }>`
 `;
 
 const links = [
-  { cardinal: 24, prefixes: ["J24", "S24", "F24"] },
-  { cardinal: 23, prefixes: ["J23", "S23", "F23_1", "F23_2"] },
-  { cardinal: 22, prefixes: ["J22", "S22", "F22"] },
-  { cardinal: 21, prefixes: ["J21", "F21"] },
-  { cardinal: 20, prefixes: ["J20"] },
+  { cardinal: 24, prefixes: ["All24", "J24", "S24", "F24"] },
+  { cardinal: 23, prefixes: ["All23", "J23", "S23", "F23_1", "F23_2"] },
+  { cardinal: 22, prefixes: ["All22", "J22", "S22", "F22"] },
+  { cardinal: 21, prefixes: ["All21", "J21", "F21"] },
+  { cardinal: 20, prefixes: ["All20", "J20"] },
 ];
 
 const NavBar = () => {
@@ -84,11 +84,6 @@ const NavBar = () => {
         <NavItem>
           <Link href="/" passHref>
             <NavLink>Home</NavLink>
-          </Link>
-        </NavItem>
-        <NavItem>
-          <Link href="/all" passHref>
-            <NavLink>All</NavLink>
           </Link>
         </NavItem>
         {links.map(({ cardinal, prefixes }) => (

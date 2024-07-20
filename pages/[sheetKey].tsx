@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { fetchStudents } from "../services/studentService";
-import { StudentTable } from "../components/StudentTable";
+import { StudentTableAll } from "../components/StudentTableAll";
 import { checkAuth } from "../utils/auth";
 import Cookies from "js-cookie";
 import Loader from "../components/Loader";
@@ -233,7 +233,7 @@ const SheetPage = () => {
         총 {filteredStudents.length - 1}개의 행이 조회되었습니다.
       </RowCount>
       <TableContainer>
-        <StudentTable students={filteredStudents} />
+        <StudentTableAll students={filteredStudents} />
       </TableContainer>
     </Container>
   );
