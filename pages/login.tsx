@@ -50,7 +50,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    if (password === "9797") {
+    if (password === process.env.PASSWORD) {
       // 예제용 비밀번호 검증
       Cookies.set("authenticated", "true", { expires: 10 }); // 10일간 인증 유지
       router.push("/");
