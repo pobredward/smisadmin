@@ -4,7 +4,8 @@ import styled from "@emotion/styled";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { fetchStudents } from "../services/studentService";
-import { StudentTableAll } from "../components/StudentTableAll";
+import { StudentTableWithHeader } from "../components/StudentTableWithHeader";
+import { StudentTableWithoutHeader } from "../components/StudentTableWithoutHeader";
 import { checkAuth } from "../utils/auth";
 import Cookies from "js-cookie";
 import Loader from "../components/Loader";
@@ -233,7 +234,11 @@ const SheetPage = () => {
         총 {filteredStudents.length - 1}개의 행이 조회되었습니다.
       </RowCount>
       <TableContainer>
-        <StudentTableAll students={filteredStudents} />
+        {sheetKey?.toString().startsWith("All") ? (
+          <StudentTableWithoutHeader students={filteredStudents} />
+        ) : (
+          <StudentTableWithHeader students={filteredStudents} />
+        )}
       </TableContainer>
     </Container>
   );

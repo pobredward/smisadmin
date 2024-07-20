@@ -21,9 +21,6 @@ const thStyle = css`
   background-color: #f2f2f2;
   padding: 8px;
   border: 1px solid #ddd;
-  position: sticky;
-  top: 0;
-  z-index: 3; /* Ensure the header is above other content */
   font-size: 10px; /* 헤더 폰트 사이즈를 줄임 */
   min-width: 50px;
   max-width: 200px; /* 최대 너비를 200px로 설정 */
@@ -77,7 +74,7 @@ type Props = {
   students: any[];
 };
 
-export const StudentTable: React.FC<Props> = ({ students }) => {
+export const StudentTableWithHeader: React.FC<Props> = ({ students }) => {
   const [headers, setHeaders] = useState<string[]>([]);
   const [rows, setRows] = useState<any[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
