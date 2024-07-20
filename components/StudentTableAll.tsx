@@ -1,6 +1,6 @@
 // components/StudentTableAll.tsx
 /** @jsxImportSource @emotion/react */
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { css } from "@emotion/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,12 +22,9 @@ const thStyle = css`
   background-color: #f2f2f2;
   padding: 8px;
   border: 1px solid #ddd;
-  position: sticky;
-  top: 0;
-  z-index: 3;
   font-size: 10px;
   min-width: 50px;
-  max-width: 200px; /* 최대 너비를 200px로 설정 */
+  max-width: 200px;
 `;
 
 const tdStyle = css`
@@ -39,8 +36,9 @@ const tdStyle = css`
   text-overflow: ellipsis;
   font-size: 11px;
   min-width: 50px;
-  max-width: 200px; /* 최대 너비를 200px로 설정 */
+  max-width: 200px;
   cursor: pointer;
+  position: relative;
 `;
 
 const stickyColStyle = css`
@@ -78,14 +76,12 @@ type Props = {
 };
 
 export const StudentTableAll: React.FC<Props> = ({ students }) => {
-  const [headers, setHeaders] = useState<string[]>([]);
   const [rows, setRows] = useState<any[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (students.length > 0) {
-      setHeaders(students[0]);
-      setRows(students.slice(1));
+      setRows(students);
     }
   }, [students]);
 
@@ -97,25 +93,6 @@ export const StudentTableAll: React.FC<Props> = ({ students }) => {
     <div css={containerStyle} ref={containerRef}>
       <ToastContainer css={toastContainerStyle} />
       <table css={tableStyle}>
-        <thead>
-          <tr>
-            {headers.map((header, index) => (
-              <th
-                key={index}
-                css={[
-                  thStyle,
-                  index === 0
-                    ? stickyColStyle
-                    : index === 1
-                      ? stickySecondColStyle
-                      : null,
-                ]}
-              >
-                {header}
-              </th>
-            ))}
-          </tr>
-        </thead>
         <tbody>
           {rows.map((student, rowIndex) => (
             <tr key={rowIndex}>
