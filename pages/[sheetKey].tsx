@@ -1,6 +1,7 @@
 // pages/[sheetKey].tsx
 import { useEffect, useState, useRef } from "react";
 import styled from "@emotion/styled";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { fetchStudents } from "../services/studentService";
 import { StudentTable } from "../components/StudentTable";
@@ -22,28 +23,37 @@ const Title = styled.h1`
 
 const SearchContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 10px;
 `;
 
+const SearchLeft = styled.div`
+  display: flex;
+`;
+
+const SearchRight = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const SearchInput = styled.input`
-  padding: 10px;
+  padding: 5px 10px;
   font-size: 12px;
-  margin-right: 10px;
+  margin-right: 5px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 200px;
+  border-radius: 3px;
+  width: 100px;
 `;
 
 const SearchButton = styled.button`
-  padding: 3px 12px;
-  font-size: 16px;
+  padding: 5px 10px;
+  font-size: 14px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: #007bff;
   color: white;
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 5px;
 
   &:hover {
     background-color: #0056b3;
@@ -51,16 +61,31 @@ const SearchButton = styled.button`
 `;
 
 const ResetButton = styled.button`
-  padding: 3px 12px;
-  font-size: 16px;
+  padding: 5px 10px;
+  font-size: 14px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: #6c757d;
+  color: white;
+  cursor: pointer;
+  margin-right: 5px;
+
+  &:hover {
+    background-color: #5a6268;
+  }
+`;
+
+const SyncButton = styled.button`
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #28a745;
   color: white;
   cursor: pointer;
 
   &:hover {
-    background-color: #5a6268;
+    background-color: #218838;
   }
 `;
 
@@ -142,6 +167,19 @@ const SheetPage = () => {
     fetchData();
   }, [sheetKey, router]);
 
+  const fetchAllStudents = async () => {
+    try {
+      const data = await fetchStudents(sheetKey as string);
+      setStudents(data);
+      setFilteredStudents(data);
+    } catch (error) {
+      setError("Failed to fetch data");
+      console.error("Error fetching data", error);
+    } finally {
+      setLoading(false); // 데이터 페칭 완료 시 로딩 상태 설정
+    }
+  };
+
   const handleSearch = () => {
     const searchTerm = searchTermRef.current?.value || "";
     if (searchTerm.trim() === "") {
@@ -167,6 +205,12 @@ const SheetPage = () => {
     setFilteredStudents(students);
   };
 
+  const handleSync = async () => {
+    setLoading(true);
+    await axios.get("/api/clearCache");
+    await fetchAllStudents();
+  };
+
   const handleLogout = () => {
     Cookies.remove("authenticated");
     router.push("/login");
@@ -190,16 +234,21 @@ const SheetPage = () => {
     <Container>
       <Title>학생 정보 - {sheetKey}</Title>
       <SearchContainer>
-        <SearchInput
-          type="text"
-          placeholder="검색어를 입력하세요"
-          ref={searchTermRef}
-          onKeyPress={handleKeyPress}
-        />
-        <SearchButton onClick={handleSearch} ref={searchButtonRef}>
-          조회
-        </SearchButton>
-        <ResetButton onClick={handleReset}>전체</ResetButton>
+        <SearchLeft>
+          <SyncButton onClick={handleSync}>동기화</SyncButton>
+        </SearchLeft>
+        <SearchRight>
+          <SearchInput
+            type="text"
+            placeholder="검색어 입력"
+            ref={searchTermRef}
+            onKeyPress={handleKeyPress}
+          />
+          <SearchButton onClick={handleSearch} ref={searchButtonRef}>
+            조회
+          </SearchButton>
+          <ResetButton onClick={handleReset}>전체</ResetButton>
+        </SearchRight>
       </SearchContainer>
       <RowCount>
         총 {filteredStudents.length - 1}개의 행이 조회되었습니다.
