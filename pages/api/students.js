@@ -45,8 +45,8 @@ async function fetchSheetData(spreadsheetId, range) {
 }
 
 export default async function handler(req, res) {
-  const { spreadsheetId } = req.query;
-  const cacheKey = `sheetData-${spreadsheetId}`;
+  const { spreadsheetId, sheetKey } = req.query;
+  const cacheKey = `sheetData-${spreadsheetId}-${sheetKey}`;
   const cachedData = cache.get(cacheKey);
 
   if (cachedData) {
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const range = "ST!A2:AQ"; // 필요한 범위 설정
+    const range = sheetKey.startsWith("All") ? "ST!A2:AQ" : "ST!A1:AQ";
     const data = await fetchSheetData(spreadsheetId, range);
     cache.set(cacheKey, data); // 데이터 캐싱
     res.status(200).json(data);

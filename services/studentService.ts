@@ -36,9 +36,9 @@ const SHEET_IDS: { [key: string]: string[] } = {
   J20: [process.env.SHEET_ID_J20],
 };
 
-const fetchSheetData = async (spreadsheetId: string) => {
+const fetchSheetData = async (spreadsheetId: string, sheetKey: string) => {
   const response = await axios.get(
-    `/api/students?spreadsheetId=${spreadsheetId}`,
+    `/api/students?spreadsheetId=${spreadsheetId}&sheetKey=${sheetKey}`,
   );
   return response.data;
 };
@@ -50,7 +50,7 @@ export const fetchStudents = async (sheetKey: string): Promise<any[]> => {
   }
 
   const promises = spreadsheetIds.map((spreadsheetId) =>
-    fetchSheetData(spreadsheetId),
+    fetchSheetData(spreadsheetId, sheetKey),
   );
   const results = await Promise.all(promises);
 
