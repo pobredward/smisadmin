@@ -24,6 +24,9 @@ const thStyle = css`
   font-size: 10px; /* 헤더 폰트 사이즈를 줄임 */
   min-width: 50px;
   max-width: 200px; /* 최대 너비를 200px로 설정 */
+  position: sticky;
+  top: 0; /* 스크롤 시 상단에 고정 */
+  z-index: 3; /* Ensure the header is above other content */
 `;
 
 const tdStyle = css`
